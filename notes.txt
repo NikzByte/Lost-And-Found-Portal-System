@@ -1,0 +1,2 @@
+limitations (for further improvement)
+-- better security for logins (import hashlib to scramble existing login contents)
