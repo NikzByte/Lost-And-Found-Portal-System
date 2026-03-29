@@ -38,15 +38,15 @@ def register():
 def login():
     while True:
         print("\nLog Into Your Account")
-        ask_userName = input("Enter username: ").lower()
-        ask_gsuiteEmail = input("Enter your Gsuite Email: ")
-        ask_password = input("Enter password: ")
-        hashed_input = hashlib.sha256(ask_password.encode()).hexdigest() # Hash the input so we can compare it to the stored version
+        userName = input("Enter username: ").lower()
+        gsuiteEmail = input("Enter your Gsuite Email: ")
+        password = input("Enter password: ")
+        hashed_input = hashlib.sha256(password.encode()).hexdigest() # Hash the input so we can compare it to the stored version
         
         logged_in = False
 
         for user_data in read_logins():
-            if (user_data[0] == ask_userName and user_data[1] == ask_gsuiteEmail and user_data[2]  == hashed_input): 
+            if (user_data[0] == userName and user_data[1] == gsuiteEmail and user_data[2]  == hashed_input): 
                 logged_in = True
                 break
                     
@@ -54,7 +54,7 @@ def login():
             print("Successfully Logged In!")
             return True
         else:
-            print("Username/Gsuite/Password Is Incorrect. Try again.\n")    
+            print("Username/Gsuite/Password Is Incorrect. Try again.")    
 
 def main_menu():
     while True:
