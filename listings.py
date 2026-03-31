@@ -24,7 +24,7 @@ def save_listings():
         
 load_listings()
        
-def create_listing():
+def create_listing(current_user):
     while True:
         print("\nPOST A LOST OR FOUND ITEM")
         item_status = input("Is Your Item Lost or Found?: ").capitalize()
@@ -43,6 +43,7 @@ def create_listing():
         contact_details = input("Enter Your Contact Details: ")
         
         listing = {
+            "user": current_user,
             "status": item_status, 
             "id": item_id,
             "name": item_name,
@@ -96,8 +97,8 @@ def lost_item_listings():
             print(f"Time: {item['time']}")
             print(f"Contact: {item['contact']}")
             
-        if not found_any:
-            print("No lost items have been reported yet.")
+    if not found_any:
+        print("No lost items have been reported yet.")
             
 def found_item_listings():
     print ("\nFound Item Listings")
@@ -117,13 +118,31 @@ def found_item_listings():
             print(f"Time: {item['time']}")
             print(f"Contact: {item['contact']}")
             
-        if not found_any:
-            print("No found items have been reported yet.")
+    if not found_any:
+        print("No found items have been reported yet.")
             
-def my_listings():
-    print("My Listings")
-    
-def listing_menu():
+def my_listings(current_user):
+    print("\nMY LISTINGS")
+    found_any = False
+
+    for item in listings:
+        if item.get("user") == current_user:
+            found_any = True
+
+            print("\n----------------------")
+            print(f"STATUS: {item['status']}")
+            print(f"Item ID: {item['id']}")
+            print(f"Name: {item['name']}")
+            print(f"Description: {item['description']}")
+            print(f"Location: {item['location']}")
+            print(f"Date: {item['date']}")
+            print(f"Time: {item['time']}")
+            print(f"Contact: {item['contact']}")
+
+    if not found_any:
+        print("You have no listings yet.")
+
+def listing_menu(current_user):
     while True:
         print("\nLISTING OPTIONS")
         print("1. Create a Post")
@@ -135,7 +154,7 @@ def listing_menu():
         choice = input("Select an option: ").strip()
         
         if choice == '1':
-            create_listing()
+            create_listing(current_user)
         elif choice == '2':
             view_all_listings()
         elif choice == '3':
@@ -143,10 +162,9 @@ def listing_menu():
         elif choice == '4':
             found_item_listings()
         elif choice == '5':
-            my_listings()
+            my_listings(current_user)
         else:
             print("Invalid Input. Try again")
             continue
             
-if __name__ == "__main__":
-    listing_menu()
+
