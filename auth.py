@@ -4,19 +4,18 @@ used for handling login and registration
 import hashlib
 
 def read_logins():
-    with open('logins.txt', 'r') as f: #reads(r) the content inside 'logins.txt'
+    with open('users.txt', 'r') as f: # reads(r) the content inside 'logins.txt'
         contents = f.readlines()
 
         new_contents = []
         
         for line in contents:
             clean_line = line.strip() 
-            if clean_line: # This ignores empty lines
+            if clean_line: # this ignores empty lines
                 fields = clean_line.split(',')
                 new_contents.append(fields)
         
         return new_contents
-logins = read_logins()
 
 def register():
     print("\nCreate New Account")
@@ -25,15 +24,16 @@ def register():
     new_password = input("Enter a Password: ") 
     # include strong password logic in the future
     
-    # hash the password before saving it on logins.txt
+    # hashes the password before saving it on logins.txt
     hashed_password = hashlib.sha256(new_password.encode()).hexdigest()
     
-    with open('logins.txt', 'a') as f:
+    with open('users.txt', 'a') as f:
         f.write(f"{new_username},{new_gsuiteEmail},{hashed_password}\n")
         
         print("Registration Successful! You can now log in.")
-
-        logins = read_logins()
+        return new_username
+    
+logins = read_logins()
 
 def login():
     while True:
@@ -52,7 +52,7 @@ def login():
                     
         if logged_in:
             print("Successfully Logged In!")
-            return True
+            return userName
         else:
             print("Username/Gsuite/Password Is Incorrect. Try again.")    
 
@@ -75,6 +75,3 @@ def main_menu():
             break
         else:
             print("Invalid choice.")
-            
-if __name__ == "__main__":
-    main_menu()
