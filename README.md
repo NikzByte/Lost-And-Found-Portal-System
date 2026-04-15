@@ -6,7 +6,7 @@ The **BatStateU Lost and Found Listing System** is a Python-based console applic
 
 ## 🎓 Project Overview
 
-The **Lost and Found Listing System** is designed to address the common issue of misplaced items among students. Instead of relying on platforms like Facebook, this system provides a more organized and efficient way to track and retrieve items.
+The **Lost and Found Listing System** is designed to address the common issue of misplaced items among students. Instead of relying on unofficial platforms like Facebook, this system provides a more organized and efficient way to track and retrieve items.
 
 The project demonstrates practical application of programming concepts such as data handling, file storage, and basic searching algorithms.
 
