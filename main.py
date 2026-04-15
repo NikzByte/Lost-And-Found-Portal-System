@@ -20,7 +20,6 @@ def main_menu():
         if choice == '1':
             user = login()
             if user:
-                print("Welcome to User Dashboard")
                 listing_menu(user)
         elif choice == '2':
             user = register()
