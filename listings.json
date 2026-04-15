@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "user": "test1",
+        "status": "Lost",
+        "id": "7BD3FF",
+        "name": "test 2",
+        "description": "item description here",
+        "location": "gym",
+        "date": "March 31, 2026",
+        "contact": "09676766767"
+    },
+    {
+        "user": "onikka",
+        "status": "Lost",
+        "id": "95A286",
+        "name": "wallet",
+        "description": "color pink, secosana",
+        "location": "University Canteen",
+        "date": "April 07, 2026",
+        "contact": "09978868000"
+    },
+    {
+        "user": "test1",
+        "status": "Found",
+        "id": "AA38B5",
+        "name": "Loraine",
+        "description": "Naka JPCS shirt",
+        "location": "University Canteen",
+        "date": "April 07, 2026",
+        "contact": "FB: Onikka Mae Buela"
+    }
+]

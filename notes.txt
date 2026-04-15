@@ -2,8 +2,9 @@ limitations (for further improvement)
 -- better security for logins (import hashlib to scramble existing login contents)
 
 more functions to add soon
--- add/edit own listings
--- gsuite only email
+-- search function ✅
+-- edit/delete own listings ✅
+-- gsuite only email 
 -- logout functions
 -- exit register/login
 -- gui

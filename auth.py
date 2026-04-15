@@ -29,7 +29,7 @@ def register():
     
     with open('users.txt', 'a') as f:
         f.write(f"{new_username},{new_gsuiteEmail},{hashed_password}\n")
-        
+         
         print("Registration Successful! You can now log in.")
         return new_username
     
@@ -56,22 +56,4 @@ def login():
         else:
             print("Username/Gsuite/Password Is Incorrect. Try again.")    
 
-def main_menu():
-    while True:
-        print("\n1. Login")
-        print("2. Register")
-        print("3. Exit")
-        choice = input("Select an option: ")
 
-        if choice == '1':
-            if login():
-                print("\nWelcome to User Dashboard!")
-                # user_dashboard
-                break
-        elif choice == '2':
-            register()
-        elif choice == '3':
-            print("Goodbye!")
-            break
-        else:
-            print("Invalid choice.")
