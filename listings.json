@@ -1,6 +1,6 @@
 [
     {
-        "user": "test1",
+        "user": "test item",
         "status": "Lost",
         "id": "7BD3FF",
         "name": "test 2",
@@ -8,16 +8,6 @@
         "location": "gym",
         "date": "March 31, 2026",
         "contact": "09676766767"
-    },
-    {
-        "user": "onikka",
-        "status": "Lost",
-        "id": "95A286",
-        "name": "wallet",
-        "description": "color pink, secosana",
-        "location": "University Canteen",
-        "date": "April 07, 2026",
-        "contact": "09978868000"
     },
     {
         "user": "test1",
@@ -28,5 +18,15 @@
         "location": "University Canteen",
         "date": "April 07, 2026",
         "contact": "FB: Onikka Mae Buela"
+    },
+    {
+        "user": "onikka",
+        "status": "Found",
+        "id": "7DAB77",
+        "name": "Ballpen",
+        "description": "LAB 03",
+        "location": "CICS Blg.",
+        "date": "April 20, 2026",
+        "contact": "09979979997"
     }
 ]

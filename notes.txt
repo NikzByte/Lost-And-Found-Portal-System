@@ -4,7 +4,6 @@ limitations (for further improvement)
 more functions to add soon
 -- search function ✅
 -- edit/delete own listings ✅
--- gsuite only email 
--- logout functions
--- exit register/login
+-- gsuite only email ✅
+-- exit register/login ✅
 -- gui
