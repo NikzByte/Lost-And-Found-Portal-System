@@ -1,3 +1,36 @@
+"""
+=======================================
+main.py - Lost & Found GUI Application
+=======================================
+This file implements a desktop-based Lost and Found system using the 
+CustomTkinter (CTk) library. The application is designed to help users 
+within an institution (e.g., Batangas State University) report, search, 
+and manage lost or found items in a centralized digital platform.
+
+Classes:
+    LostAndFoundApp -- Main application window managing all screens and system logic.
+
+Methods:
+    load_listings()         -- Loads item listings from listings.json.
+    save_listings()         -- Saves current listings to listings.json.
+    check_auth(u, p)        -- Validates login credentials against users.json.
+    show_login()            -- Renders the login screen.
+    show_register()         -- Renders the registration screen.
+    show_dashboard()        -- Renders the main dashboard with sidebar and feed.
+    render_listings(filter) -- Displays listings filtered by 'all', 'Lost', 'Found'.
+    open_create_post()      -- Opens a popup to submit a new listing.
+    open_edit_post(item)    -- Opens a popup to edit an existing listing.
+    delete_post(item)       -- Deletes a listing after confirmation.ions.
+
+Purpose of the File:
+This file serves as the main application entry point and contains all core 
+logic for GUI rendering, event handling, user interaction, and data management 
+for the Lost and Found system.
+
+Author:  Onikka Mae Buela
+Date:    April 20, 2026
+"""
+
 import customtkinter as ctk
 from tkinter import messagebox
 import hashlib
@@ -7,11 +40,14 @@ from datetime import datetime
 from PIL import Image
 import os
 
-# --- SET THEME ---
+# ==================
+# SET SYSTEM THEME
+# ==================
+
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue") 
 
-COLOR_BSU_RED = "#D32F2F"
+COLOR_RED = "#D32F2F"
 COLOR_WHITE = "#FFFFFF"
 
 class LostAndFoundApp(ctk.CTk):
@@ -31,7 +67,10 @@ class LostAndFoundApp(ctk.CTk):
 
         window.show_login()
 
-    # --- DATA LOGIC ---
+# ===================
+# SYSTEM DATA LOGIC
+# ===================
+
     def load_listings(window):
         if not os.path.exists("listings.json") or os.stat("listings.json").st_size == 0:
             return []
@@ -59,8 +98,10 @@ class LostAndFoundApp(ctk.CTk):
         except:
             return False
         return False
-
-    # --- NAVIGATION & SCREENS ---
+# ========================
+# NAVIGATION & SCREENS
+# ========================
+ 
     def clear_screen(window):
         for widget in window.winfo_children():
             widget.destroy()
@@ -70,7 +111,7 @@ class LostAndFoundApp(ctk.CTk):
         frame = ctk.CTkFrame(window, fg_color="transparent")
         frame.place(relx=0.5, rely=0.5, anchor="center")
 
-        ctk.CTkLabel(frame, text="LOST & FOUND SYSTEM", font=("Arial", 24, "bold"), text_color=COLOR_BSU_RED).pack(pady=20)
+        ctk.CTkLabel(frame, text="LOST & FOUND SYSTEM", font=("Arial", 24, "bold"), text_color=COLOR_RED).pack(pady=20)
         u_entry = ctk.CTkEntry(frame, placeholder_text="Username", width=300)
         u_entry.pack(pady=10)
         p_entry = ctk.CTkEntry(frame, placeholder_text="Password", show="*", width=300)
@@ -83,7 +124,7 @@ class LostAndFoundApp(ctk.CTk):
             else:
                 messagebox.showerror("Error", "Invalid Username or Password")
 
-        ctk.CTkButton(frame, text="Login", fg_color=COLOR_BSU_RED, command=login_cmd).pack(pady=10)
+        ctk.CTkButton(frame, text="Login", fg_color=COLOR_RED, command=login_cmd).pack(pady=10)
         ctk.CTkButton(frame, text="Register New Account", fg_color="gray", command=window.show_register).pack()
 
     def show_register(window):
@@ -91,7 +132,7 @@ class LostAndFoundApp(ctk.CTk):
         frame = ctk.CTkFrame(window, fg_color="transparent")
         frame.place(relx=0.5, rely=0.5, anchor="center")
 
-        ctk.CTkLabel(frame, text="CREATE ACCOUNT", font=("Arial", 24, "bold"), text_color=COLOR_BSU_RED).pack(pady=20)
+        ctk.CTkLabel(frame, text="CREATE ACCOUNT", font=("Arial", 24, "bold"), text_color=COLOR_RED).pack(pady=20)
         u_entry = ctk.CTkEntry(frame, placeholder_text="Username", width=300)
         u_entry.pack(pady=5)
         e_entry = ctk.CTkEntry(frame, placeholder_text="GSuite Email", width=300)
@@ -129,14 +170,16 @@ class LostAndFoundApp(ctk.CTk):
             else:
                 messagebox.showwarning("Warning", "Fields cannot be empty")
 
-        ctk.CTkButton(frame, text="Register", fg_color=COLOR_BSU_RED, command=reg_cmd).pack(pady=10)
+        ctk.CTkButton(frame, text="Register", fg_color=COLOR_RED, command=reg_cmd).pack(pady=10)
         ctk.CTkButton(frame, text="Back to Login", fg_color="gray", command=window.show_login).pack()
 
     def show_dashboard(window):
         window.clear_screen()
-        
+
+        # ================
         # 1. SIDEBAR
-        window.sidebar = ctk.CTkFrame(window, fg_color=COLOR_BSU_RED, corner_radius=0, width=280)
+        # ================
+        window.sidebar = ctk.CTkFrame(window, fg_color=COLOR_RED, corner_radius=0, width=280)
         window.sidebar.grid(row=0, column=0, sticky="nsew")
 
         try:
@@ -148,27 +191,29 @@ class LostAndFoundApp(ctk.CTk):
         # Sidebar Buttons
         btn_opts = {"fg_color": "transparent", "text_color": "white", "anchor": "w", "font": ("Arial", 14, "bold"), "height": 50}
         
-        ctk.CTkButton(window.sidebar, text="⊕ CREATE A POST", fg_color="white", text_color=COLOR_BSU_RED, corner_radius=25, font=("Arial", 14, "bold"), command=window.open_create_post).pack(padx=20, pady=20, fill="x")
+        ctk.CTkButton(window.sidebar, text="⊕ CREATE A POST", fg_color="white", text_color=COLOR_RED, corner_radius=25, font=("Arial", 14, "bold"), command=window.open_create_post).pack(padx=20, pady=20, fill="x")
         ctk.CTkButton(window.sidebar, text="🔍  VIEW ALL LISTINGS", command=lambda: window.render_listings("all"), **btn_opts).pack(fill="x", padx=10)
         ctk.CTkButton(window.sidebar, text="🔍  LOST ITEM LISTINGS", command=lambda: window.render_listings("Lost"), **btn_opts).pack(fill="x", padx=10)
         ctk.CTkButton(window.sidebar, text="🔍  FOUND ITEM LISTINGS", command=lambda: window.render_listings("Found"), **btn_opts).pack(fill="x", padx=10)
         ctk.CTkButton(window.sidebar, text="📑  MY LISTINGS", command=lambda: window.render_listings("mine"), **btn_opts).pack(fill="x", padx=10)
         ctk.CTkButton(window.sidebar, text="Logout", command=window.show_login, **btn_opts).pack(side="bottom", pady=20, fill="x", padx=10)
 
+        # ================
         # 2. MAIN AREA
+        # ================
         window.main_container = ctk.CTkFrame(window, fg_color="#F9F9F9", corner_radius=0)
         window.main_container.grid(row=0, column=1, sticky="nsew")
 
         # Header
         header = ctk.CTkFrame(window.main_container, fg_color="transparent")
         header.pack(fill="x", padx=40, pady=(40, 10))
-        ctk.CTkLabel(header, text="LOST AND FOUND LISTING SYSTEM", font=("Arial", 28, "bold"), text_color=COLOR_BSU_RED).pack(side="left")
+        ctk.CTkLabel(header, text="LOST AND FOUND LISTING SYSTEM", font=("Arial", 28, "bold"), text_color=COLOR_RED).pack(side="left")
         
         # User Display
         user_display = ctk.CTkFrame(header, fg_color="transparent")
         user_display.pack(side="right")
         ctk.CTkLabel(user_display, text=f"{window.current_user.upper()}\nStudent", font=("Arial", 10), justify="right").pack(side="left", padx=10)
-        ctk.CTkLabel(user_display, text="👤", font=("Arial", 30), text_color=COLOR_BSU_RED).pack(side="right")
+        ctk.CTkLabel(user_display, text="👤", font=("Arial", 30), text_color=COLOR_RED).pack(side="right")
 
         # Search Bar
         window.search_bar = ctk.CTkEntry(
@@ -186,10 +231,13 @@ class LostAndFoundApp(ctk.CTk):
         window.scroll_feed = ctk.CTkScrollableFrame(window.main_container, fg_color="transparent")
         window.scroll_feed.pack(fill="both", expand=True, padx=40, pady=10)
 
+        # ================
         # 3. RIGHT PANEL
+        # ================
+
         window.guide_panel = ctk.CTkFrame(window, fg_color=COLOR_WHITE, width=220, corner_radius=0)
         window.guide_panel.grid(row=0, column=2, sticky="nsew")
-        ctk.CTkLabel(window.guide_panel, text="LISTING GUIDELINES", font=("Arial", 12, "bold"), text_color=COLOR_BSU_RED).pack(pady=(40, 10))
+        ctk.CTkLabel(window.guide_panel, text="LISTING GUIDELINES", font=("Arial", 12, "bold"), text_color=COLOR_RED).pack(pady=(40, 10))
         
         guide_text = "• Be specific\n• Identify colors\n• State location\n• Mention markings\n• Withhold secret detail\n• Professional language"
         ctk.CTkLabel(window.guide_panel, text=guide_text, justify="left", font=("Arial", 11)).pack(padx=20)
@@ -214,7 +262,7 @@ class LostAndFoundApp(ctk.CTk):
 
             title_f = ctk.CTkFrame(card, fg_color="transparent")
             title_f.pack(fill="x", padx=15, pady=10)
-            ctk.CTkLabel(title_f, text="👤", font=("Arial", 25), text_color=COLOR_BSU_RED).pack(side="left")
+            ctk.CTkLabel(title_f, text="👤", font=("Arial", 25), text_color=COLOR_RED).pack(side="left")
             ctk.CTkLabel(title_f, text=f"{item['user'].upper()}\n{item['date']}", font=("Arial", 11, "bold"), justify="left").pack(side="left", padx=10)
 
             details = (f"Item ID: {item['id']}\nItem name: {item['name']}\nDescription: {item['description']}\n"
@@ -233,7 +281,7 @@ class LostAndFoundApp(ctk.CTk):
         win.geometry("400x600")
         win.attributes('-topmost', True)
 
-        ctk.CTkLabel(win, text="POST AN ITEM", font=("Arial", 18, "bold"), text_color=COLOR_BSU_RED).pack(pady=20)
+        ctk.CTkLabel(win, text="POST AN ITEM", font=("Arial", 18, "bold"), text_color=COLOR_RED).pack(pady=20)
         name_e = ctk.CTkEntry(win, placeholder_text="Item Name", width=300); name_e.pack(pady=5)
         status_c = ctk.CTkComboBox(win, values=["Lost", "Found"], width=300); status_c.pack(pady=5)
         desc_e = ctk.CTkEntry(win, placeholder_text="Description", width=300); desc_e.pack(pady=5)
@@ -259,7 +307,7 @@ class LostAndFoundApp(ctk.CTk):
             win.destroy()
             window.render_listings("all")
 
-        ctk.CTkButton(win, text="Submit Post", fg_color=COLOR_BSU_RED, command=submit).pack(pady=30)
+        ctk.CTkButton(win, text="Submit Post", fg_color=COLOR_RED, command=submit).pack(pady=30)
         
     def open_edit_post(window, item):
         win = ctk.CTkToplevel(window)
@@ -267,7 +315,7 @@ class LostAndFoundApp(ctk.CTk):
         win.geometry("400x600")
         win.attributes('-topmost', True)
         
-        ctk.CTkLabel(win, text="EDIT ITEM", font=("Arial", 18, "bold"), text_color=COLOR_BSU_RED).pack(pady=20)
+        ctk.CTkLabel(win, text="EDIT ITEM", font=("Arial", 18, "bold"), text_color=COLOR_RED).pack(pady=20)
         name_e = ctk.CTkEntry(win, width=300); name_e.insert(0, item['name']); name_e.pack(pady=5)
         status_c = ctk.CTkComboBox(win, values=["Lost", "Found"], width=300); status_c.set(item['status']); status_c.pack(pady=5)
         desc_e = ctk.CTkEntry(win, width=300); desc_e.insert(0, item['description']); desc_e.pack(pady=5)
@@ -286,7 +334,7 @@ class LostAndFoundApp(ctk.CTk):
             win.destroy()
             window.render_listings("all")
 
-        ctk.CTkButton(win, text="Save Changes", fg_color=COLOR_BSU_RED, command=save_changes).pack(pady=30)
+        ctk.CTkButton(win, text="Save Changes", fg_color=COLOR_RED, command=save_changes).pack(pady=30)
         
     def delete_post(window, item):
         if messagebox.askyesno("Confirm Delete", "Are you sure you want to delete this listing?"):

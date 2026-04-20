@@ -1,0 +1,116 @@
+=======================================
+main.py - Lost & Found GUI Application
+=======================================
+This file implements a desktop-based Lost and Found system using the 
+CustomTkinter (CTk) library. The application is designed to help users 
+within an institution (e.g., Batangas State University) report, search, 
+and manage lost or found items in a centralized digital platform.
+
+Core Functionality:
+- User Authentication:
+  • Allows users to register using a valid institutional email.
+  • Secures login credentials using SHA-256 password hashing.
+  • Validates users against stored records in a local JSON database.
+
+- Listing Management:
+  • Users can create, edit, and delete item listings.
+  • Each listing contains details such as item name, description,
+    location, date, contact information, and status (Lost/Found).
+  • Listings are uniquely identified using generated IDs.
+
+- Search and Filtering:
+  • Real-time search functionality for item name, description, and location.
+  • Filter listings by category (All, Lost, Found, or User-specific listings).
+
+- Graphical User Interface:
+  • Built using CustomTkinter for a modern and responsive UI.
+  • Includes structured layout with sidebar navigation, main content area,
+    and a guideline panel for posting instructions.
+
+- Data Persistence:
+  • Stores user data in 'users.json' and listings in 'listings.json'.
+  • Automatically loads and saves data to maintain consistency between sessions.
+
+Purpose of the File:
+This file serves as the main application entry point and contains all core 
+logic for GUI rendering, event handling, user interaction, and data management 
+for the Lost and Found system.
+
+============================================
+listings.py - Lost & Found Listings Module
+============================================
+This file contains the core logic for managing lost and found item listings. 
+It handles the creation, storage, retrieval, searching, editing, and deletion 
+of listings using a local JSON file as persistent storage.
+
+Core Functionality:
+- Data Handling:
+  • Loads listings from 'listings.json' at startup.
+  • Saves all updates back to the JSON file to ensure data persistence.
+  • Handles missing or corrupted files by initializing an empty dataset.
+
+- Listing Creation:
+  • Allows users to create new lost or found item posts.
+  • Automatically generates a unique item ID using UUID.
+  • Stores relevant details such as item name, description, location,
+    date, and contact information.
+
+- Viewing Listings:
+  • Displays all listings.
+  • Filters listings by status (Lost or Found).
+  • Shows listings created by the currently logged-in user.
+
+- Search Function:
+  • Enables keyword-based searching across item name, description,
+    and location fields.
+
+- Listing Management:
+  • Allows users to edit their own listings.
+  • Supports deletion of listings with confirmation.
+  • Ensures users can only modify or delete their own entries.
+
+- User Interaction:
+  • Provides a menu-driven interface for navigating listing operations.
+  • Uses input prompts and console outputs for interaction.
+
+Purpose of the File:
+This module serves as the backend logic for listing management in the
+Lost and Found system. It is intended to be integrated with an
+authentication system and acts as the main handler for all listing-related
+operations in a console-based application.
+
+======================================
+auth.py - User Authentication Module
+======================================
+This file handles user registration, login, and credential storage
+for a Lost and Found system using a JSON-based local database.
+
+Core Functionality:
+- User Data Management:
+  • Reads and writes user credentials from/to 'users.json'.
+  • Ensures the file exists and is properly formatted before use.
+  • Handles corrupted or empty JSON files safely.
+
+- User Registration:
+  • Allows new users to create accounts using a username, GSuite email,
+    and password.
+  • Restricts registration to valid institutional emails
+    (@g.batstate-u.edu.ph).
+  • Hashes passwords using SHA-256 for basic security before storage.
+  • Prevents duplicate or invalid account entries.
+  • Saves new users into the JSON database.
+
+- User Login:
+  • Authenticates users using username, email, and password.
+  • Compares hashed passwords for secure verification.
+  • Validates credentials against stored user data.
+  • Allows retry on failed login attempts.
+
+- Exit Handling:
+  • Users can type 'exit' during registration or login to return
+    to the main menu safely.
+
+Purpose of the File:
+This module provides basic authentication services for the Lost and Found
+system. It ensures that only registered users with valid credentials can
+access and manage listings within the application.

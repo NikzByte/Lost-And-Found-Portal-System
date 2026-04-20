@@ -1,5 +1,5 @@
 '''
-Main function of the system :D
+The Beta Version / Console-Based Version Of The System
 '''
 
 # import function from other file yiz
