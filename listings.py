@@ -337,3 +337,22 @@ def listing_menu(current_user):
         print("7. Edit My Listing")
         print("8. Delete My Listing")
         choice = input("Select an option: ").strip()
+        
+        if choice == "1":
+            create_listing(current_user)
+        elif choice == "2":
+            view_all_listings()
+        elif choice == "3":
+            lost_item_listings()
+        elif choice == "4":
+            found_item_listings()
+        elif choice == "5":
+            my_listings(current_user)
+        elif choice == "6":
+            search_listings()
+        elif choice == "7":
+            edit_listing(current_user)
+        elif choice == "8":
+            delete_listing(current_user)
+        else:
+            print("Invalid option. Please enter a number from 1 to 9.")
